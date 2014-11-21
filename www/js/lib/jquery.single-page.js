@@ -1,4 +1,4 @@
-define(["jquery", "bootstrap", "history"], function (jQuery) {
+define(["jquery", "triggeranalytics", "bootstrap", "history"], function (jQuery, analytics) {
     jQuery.fn.singlePage = function () {
         // Check the initial Position of the Sticky Header
         var stickyHeader = this;
@@ -54,7 +54,7 @@ define(["jquery", "bootstrap", "history"], function (jQuery) {
         };
 
         stickyHeader.find('a').click(function () {
-            var nOffset = stickyHeaderHeight;
+            var nOffset = stickyHeaderHeight -1;
             var sHash = jQuery(this).attr('href');
             var nDivOffset = jQuery(sHash).offset().top;
             var bFixed = stickyHeader.css('position') == "fixed";
@@ -78,6 +78,6 @@ define(["jquery", "bootstrap", "history"], function (jQuery) {
         require(["index.html"], function (page) {
             if (typeof page !== 'undefined') page();
         });
-
+        analytics();
     };
 });
