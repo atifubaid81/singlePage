@@ -1,10 +1,11 @@
 define(["jquery", "bootstrap", "async!//maps.google.com/maps/api/js?sensor=false"], function(jQuery){
     return function(){
         jQuery(".carousel").carousel();
-            var myOptions = {
+        var myOptions = {
             zoom: 14,
             center: new google.maps.LatLng(43.4531855, -80.55331509999996),
-            mapTypeId: google.maps.MapTypeId.ROADMAP
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            scrollwheel: false
         };
         map = new google.maps.Map(document.getElementById("gmap_canvas"), myOptions);
         marker = new google.maps.Marker({

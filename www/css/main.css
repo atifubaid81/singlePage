@@ -18,3 +18,29 @@ input[type*="email"],
 textarea {
     width: 100%;
 }
+
+a.scrollToTop {
+    width: 100px;
+    height: 130px;
+    padding: 10px;
+    text-align: center;
+    font-family: 'Roboto Condensed', 'tahoma', 'Verdana', 'Geneva', sans-serif;
+    font-size: 13px;
+    background: url('../images/uparrow.png') no-repeat center center;
+    font-weight: none;
+    color: #444;
+    text-decoration: none;
+    position: fixed;
+    top: 75px;
+    right: 1px;
+    display: none;
+    -webkit-transition: 3s;
+    -moz-transition: 3s;
+    transition: 3s;
+    cursor: pointer;
+    z-index: 8;
+}
+.scrollToTop:hover {
+    text-decoration: none;
+}
+
