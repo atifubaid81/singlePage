@@ -1,38 +1,44 @@
-define(["jquery", "bootstrap", "async!//maps.google.com/maps/api/js?sensor=false"], function(jQuery){
+define(["jquery", "async!//maps.google.com/maps/api/js?sensor=false"], function(jQuery){
     return function(){
-        jQuery(".carousel").carousel();
         var myOptions = {
             zoom: 14,
-            center: new google.maps.LatLng(43.4531855, -80.55331509999996),
-            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            center: new google.maps.LatLng(43.133350, -80.339225),
+            mapTypeId: google.maps.MapTypeId.SATELLITE,
             scrollwheel: false
         };
         map = new google.maps.Map(document.getElementById("gmap_canvas"), myOptions);
-        marker = new google.maps.Marker({
+        markers = [new google.maps.Marker({
             map: map,
-            position: new google.maps.LatLng(43.4531855, -80.55331509999996)
-        });
-        infowindow = new google.maps.InfoWindow({
-            content: "<b>Salesucation.com Inc.</b><br/>5-420 Erb St . W<br/>N2L6K6 Waterloo"
-        });
-        google.maps.event.addListener(marker, "click", function () {
-            infowindow.open(map, marker);
-        });
-        infowindow.open(map, marker);
-        jQuery("#inquiry").submit(function(){
-            jQuery.ajax({
-                url:"https://rich-hildred.rhcloud.com/Mailer/4953dc8bd6100c7fc61abb1",
-                dataType:"json",
-                data: jQuery("#inquiry").serialize()
-            }).done(function(oResponse){
-                jQuery("#result").html(oResponse.result);
-                jQuery('#inquiry').trigger("reset");
-            }).fail(function(sHtml){
-                jQuery("#result").css("color", "red").html(sHtml);
-            });
-            return false;
-
-        });
-
+            position: new google.maps.LatLng(43.133350, -80.339225)
+        }), new google.maps.Marker({
+            map: map,
+            position: new google.maps.LatLng(43.152448, -80.318157)
+        }), new google.maps.Marker({
+            map: map,
+            position: new google.maps.LatLng(43.170471, -80.299977)
+        }), new google.maps.Marker({
+            map: map,
+            position: new google.maps.LatLng(43.123042, -80.350052)
+        }), new google.maps.Marker({
+            map: map,
+            position: new google.maps.LatLng(43.103372, -80.363738)
+        })];
+        infowindows = [new google.maps.InfoWindow({
+            content: "<b>Brantford Flight Center</b><br/> Center of Runway <br/>43.133350, -80.339225"
+        }), new google.maps.InfoWindow({
+            content: "<b>Grand River Bridge</b><br/> Center of Runway <br/>43.133350, -80.339225"
+        }),new google.maps.InfoWindow({
+            content: "<b>403 Clover Leaf</b><br/> Center of Runway <br/>43.133350, -80.339225"
+        }),new google.maps.InfoWindow({
+            content: "<b>White Roof - Colborne Street Farm</b><br/> Center of Runway <br/>43.133350, -80.339225"
+        }),new google.maps.InfoWindow({
+            content: "<b>Godby Road Pond</b><br/> Center of Runway <br/>43.133350, -80.339225"
+        })];
+        for (var n = 0; n < markers.length; n++) {
+            google.maps.event.addListener(markers[n], "click",
+                                          jQuery.proxy(function (evt) {
+                infowindows[this.n].open(map, markers[this.n]);
+            }, {n:n} ));
+        }
     };
 });
